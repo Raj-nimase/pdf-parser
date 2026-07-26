@@ -87,7 +87,7 @@ class DeterministicMathConverter:
         return line
 
     def _clean_footnote_symbol_blocks(self, line: str) -> str:
-        """
+        r"""
         Cleans up footnote symbols, daggers, asterisks, and multi-line author superscripts like:
         Ashish Vaswani^{\n*\n*\n} -> Ashish Vaswani$^*$
         > _†_ > _∗_^{∗†_}^{∗_} -> > $^\dagger$ $^*$
@@ -135,7 +135,7 @@ class DeterministicMathConverter:
         return line
 
     def _fix_interleaved_fraction_footnotes(self, line: str) -> str:
-        """
+        r"""
         Fixes PDF extraction artifact where page-bottom footnote text is inserted inside a fraction:
         scaling factor of <u>1</u><sup>Additive attention computes...</sup> _~~√~~ dk_<sup>.</sup>
         -> scaling factor of \frac{1}{\sqrt{d_k}}. Additive attention computes...
@@ -170,7 +170,7 @@ class DeterministicMathConverter:
         return line
 
     def _fix_broken_decimals_and_slashes(self, line: str) -> str:
-        """
+        r"""
         Fixes PyMuPDF4LLM extraction artifacts like:
         0 _._ 9 -> 0.9
         0_._9 -> 0.9
@@ -242,7 +242,7 @@ class DeterministicMathConverter:
         return text
 
     def _convert_hyperparameters_and_greeks(self, line: str) -> str:
-        """
+        r"""
         Generic Greek Letter, Subscripted Hyperparameter, and Parametric Constant Converter.
         Handles Greek symbols (\beta, \alpha, \epsilon, \gamma, \delta, \theta, \pi)
         and subscripted hyperparameters (P_drop, \epsilon_ls, warmup_steps) across any paper.
@@ -288,7 +288,7 @@ class DeterministicMathConverter:
         return line
 
     def _convert_footnotes_and_sums(self, line: str) -> str:
-        """
+        r"""
         Generic Summation & Dot Product Converter:
         Formats dot product summations q \cdot k = \sum q_i k_i across any paper.
         """
@@ -302,7 +302,7 @@ class DeterministicMathConverter:
         return line
 
     def _convert_parameter_matrices(self, line: str) -> str:
-        """
+        r"""
         Generic Parameter Matrix Converter across ANY PDF:
         Transforms any weight matrix domain mapping line like:
         Wi^Q \in \mathbb{R}^{d_{model}} ^{×dk_}
